@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>Обитатели морских глубин — Музей природы</title>
+  <title>Музей природы — Аудиогид</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Unbounded:wght@700;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
@@ -18,7 +18,6 @@
         radial-gradient(ellipse at 15% 80%, rgba(198,212,0,0.10) 0%, transparent 40%);
       background-attachment: fixed;
     }
-
     .logo-corner {
       position:fixed; top:14px; right:14px;
       width:64px; height:64px; z-index:999;
@@ -29,126 +28,77 @@
     }
     .logo-corner img { width:100%; height:100%; object-fit:contain; display:block; }
 
-    .page { display:flex; flex-direction:column; align-items:center; padding:36px 20px 60px; }
+    .page { display:flex; flex-direction:column; align-items:center; padding:36px 20px 60px; gap:28px; }
 
-    /* ── HERO ── */
-    .museum-badge { font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); background:rgba(255,255,255,0.85); border:1px solid #dde; padding:6px 16px; border-radius:100px; text-align:center; line-height:1.6; }
-    .hero { margin-top:20px; text-align:center; }
-    .hero-emoji { font-size:64px; display:block; animation:float 4s ease-in-out infinite; }
+    /* HERO */
+    .hero { display:flex; flex-direction:column; align-items:center; text-align:center; }
+    .museum-badge { font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); background:rgba(255,255,255,0.85); border:1px solid #dde; padding:6px 16px; border-radius:100px; line-height:1.6; }
+    .hero-emoji { font-size:72px; margin-top:20px; display:block; animation:float 4s ease-in-out infinite; }
     @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
-    .hero h1 { margin-top:12px; font-family:'Unbounded',sans-serif; font-size:20px; font-weight:900; line-height:1.3; max-width:300px; margin-left:auto; margin-right:auto; }
+    .hero h1 { margin-top:14px; font-family:'Unbounded',sans-serif; font-size:20px; font-weight:900; line-height:1.35; max-width:300px; }
     .hero-line { display:block; width:56px; height:4px; background:linear-gradient(90deg,var(--blue),var(--purple),var(--pink)); border-radius:2px; margin:12px auto 0; }
-    .hero p { margin-top:10px; font-size:13px; color:var(--muted); max-width:280px; margin-left:auto; margin-right:auto; line-height:1.6; }
+    .hero p { margin-top:10px; font-size:13px; color:var(--muted); max-width:280px; line-height:1.6; }
 
-    .btn-start {
-      margin-top:24px;
-      display:inline-block;
+    .btn-back {
+      margin-top:20px;
+      display:inline-flex; align-items:center; gap:8px;
       background:linear-gradient(135deg,var(--blue),var(--purple));
       color:white; font-family:'Unbounded',sans-serif;
-      font-size:13px; font-weight:700;
-      padding:14px 32px; border-radius:100px;
+      font-size:12px; font-weight:700;
+      padding:14px 28px; border-radius:100px;
       text-decoration:none;
       box-shadow:0 6px 20px rgba(0,159,227,0.3);
       transition:transform 0.15s;
     }
-    .btn-start:active { transform:scale(0.96); }
+    .btn-back:active { transform:scale(0.96); }
 
-    /* ── SECTION ── */
-    .section { margin-top:48px; width:100%; max-width:460px; }
+    /* SECTIONS */
+    .section { width:100%; max-width:460px; display:flex; flex-direction:column; gap:12px; }
     .section-title {
-      font-family:'Unbounded',sans-serif; font-size:13px; font-weight:700;
-      letter-spacing:1px; text-transform:uppercase;
-      color:var(--text); margin-bottom:16px;
+      font-family:'Unbounded',sans-serif; font-size:12px; font-weight:700;
+      letter-spacing:1px; text-transform:uppercase; color:var(--text);
       display:flex; align-items:center; gap:10px;
     }
-    .section-title::after {
-      content:''; flex:1; height:2px;
-      background:linear-gradient(90deg, rgba(0,0,0,0.08), transparent);
-      border-radius:2px;
-    }
+    .section-title::after { content:''; flex:1; height:2px; background:linear-gradient(90deg, rgba(0,0,0,0.08), transparent); border-radius:2px; }
 
-    /* ── GRID ── */
-    .grid {
-      display:grid; grid-template-columns:1fr 1fr; gap:12px;
-    }
-    .exhibit-card {
-      background:rgba(255,255,255,0.82);
-      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-      border-radius:16px; border:1px solid rgba(255,255,255,0.95);
-      box-shadow:0 2px 10px rgba(0,0,0,0.06);
-      display:flex; flex-direction:column; align-items:center;
-      padding:14px 10px 12px; gap:8px;
-      text-decoration:none; color:var(--text);
-      animation:slide-up 0.4s ease both;
-      transition:transform 0.15s;
-    }
-    .exhibit-card:active { transform:scale(0.96); }
-    .exhibit-card:nth-child(1)  { border-top:3px solid var(--blue);   animation-delay:0.05s; }
-    .exhibit-card:nth-child(2)  { border-top:3px solid var(--purple); animation-delay:0.10s; }
-    .exhibit-card:nth-child(3)  { border-top:3px solid var(--pink);   animation-delay:0.15s; }
-    .exhibit-card:nth-child(4)  { border-top:3px solid var(--lime);   animation-delay:0.20s; }
-    .exhibit-card:nth-child(5)  { border-top:3px solid var(--blue);   animation-delay:0.25s; }
-    .exhibit-card:nth-child(6)  { border-top:3px solid var(--purple); animation-delay:0.30s; }
-    .exhibit-card:nth-child(7)  { border-top:3px solid var(--pink);   animation-delay:0.35s; }
-    .exhibit-card:nth-child(8)  { border-top:3px solid var(--lime);   animation-delay:0.40s; }
-    .exhibit-card:nth-child(9)  { border-top:3px solid var(--blue);   animation-delay:0.45s; }
-    .exhibit-card:nth-child(10) { border-top:3px solid var(--purple); animation-delay:0.50s; }
-    @keyframes slide-up { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-    .exhibit-card img { width:90px; height:72px; object-fit:contain; filter:drop-shadow(0 3px 6px rgba(0,0,0,0.10)); }
-    .exhibit-card span { font-family:'Unbounded',sans-serif; font-size:9px; font-weight:700; text-align:center; line-height:1.4; }
-
-    /* ── CONTACTS ── */
-    .contact-card {
-      background:rgba(255,255,255,0.82);
-      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-      border-radius:16px; border:1px solid rgba(255,255,255,0.95);
-      box-shadow:0 2px 10px rgba(0,0,0,0.06);
-      padding:18px 20px; display:flex; flex-direction:column; gap:14px;
-    }
-    .contact-row { display:flex; align-items:flex-start; gap:12px; }
-    .contact-icon { font-size:22px; flex-shrink:0; margin-top:1px; }
-    .contact-text { flex:1; }
-    .contact-label { font-family:'Unbounded',sans-serif; font-size:9px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:3px; }
-    .contact-value { font-size:13px; line-height:1.5; color:var(--text); }
-    .contact-value a { color:var(--blue); text-decoration:none; font-weight:700; }
-
-    /* ── ОТЗЫВ ── */
+    /* ОТЗЫВ */
     .review-card {
       background:rgba(255,255,255,0.82);
       backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
       border-radius:16px; border:1px solid rgba(255,255,255,0.95);
       box-shadow:0 2px 10px rgba(0,0,0,0.06);
-      padding:20px;
+      padding:20px; display:flex; flex-direction:column; gap:12px;
     }
-    .review-card p { font-size:13px; color:var(--muted); margin-bottom:14px; line-height:1.6; }
-    .review-field {
-      width:100%; border:1.5px solid #dde; border-radius:12px;
-      padding:12px 14px; font-family:'Nunito',sans-serif;
-      font-size:14px; color:var(--text); background:white;
-      resize:none; outline:none; transition:border-color 0.2s;
-      margin-bottom:10px;
+    .review-card p { font-size:13px; color:var(--muted); line-height:1.6; }
+    .btn-form {
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      background:linear-gradient(135deg,var(--pink),var(--purple));
+      color:white; font-family:'Unbounded',sans-serif;
+      font-size:12px; font-weight:700;
+      padding:14px; border-radius:12px;
+      text-decoration:none;
+      box-shadow:0 4px 16px rgba(229,0,126,0.25);
+      transition:transform 0.15s;
     }
-    .review-field:focus { border-color:var(--blue); }
-    .review-name {
-      width:100%; border:1.5px solid #dde; border-radius:12px;
-      padding:12px 14px; font-family:'Nunito',sans-serif;
-      font-size:14px; color:var(--text); background:white;
-      outline:none; transition:border-color 0.2s;
-      margin-bottom:10px;
-    }
-    .review-name:focus { border-color:var(--blue); }
-    .btn-send {
-      width:100%; padding:14px;
-      background:linear-gradient(135deg,var(--blue),var(--purple));
-      color:white; border:none; border-radius:12px;
-      font-family:'Unbounded',sans-serif; font-size:12px; font-weight:700;
-      cursor:pointer; transition:transform 0.15s;
-    }
-    .btn-send:active { transform:scale(0.97); }
-    .thanks { display:none; text-align:center; font-size:14px; color:var(--blue); font-weight:700; padding:10px 0; }
+    .btn-form:active { transform:scale(0.97); }
 
-    /* ── FOOTER ── */
-    .footer { margin-top:48px; display:flex; flex-direction:column; align-items:center; gap:10px; }
+    /* КОНТАКТЫ */
+    .contact-card {
+      background:rgba(255,255,255,0.82);
+      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      border-radius:16px; border:1px solid rgba(255,255,255,0.95);
+      box-shadow:0 2px 10px rgba(0,0,0,0.06);
+      padding:18px 20px; display:flex; flex-direction:column; gap:16px;
+    }
+    .contact-row { display:flex; align-items:flex-start; gap:12px; }
+    .contact-icon { font-size:22px; flex-shrink:0; margin-top:1px; }
+    .contact-text { flex:1; }
+    .contact-label { font-family:'Unbounded',sans-serif; font-size:9px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+    .contact-value { font-size:13px; line-height:1.5; color:var(--text); }
+    .contact-value a { color:var(--blue); text-decoration:none; font-weight:700; }
+
+    /* FOOTER */
+    .footer { display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:8px; }
     .footer-text { font-size:10px; color:#aaa; letter-spacing:1px; text-align:center; }
     .footer-link { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.85); border:1px solid #dde; border-radius:100px; padding:8px 18px; text-decoration:none; color:var(--blue); font-size:12px; font-weight:700; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
   </style>
@@ -159,61 +109,24 @@
 
 <div class="page">
 
-  <div class="museum-badge">МАОУ СОШ №6 с УИОП · Музей природы</div>
-
   <!-- HERO -->
   <div class="hero">
+    <div class="museum-badge">МАОУ СОШ №6 с УИОП · Музей природы</div>
     <span class="hero-emoji">🌊</span>
     <h1>Обитатели морских глубин</h1>
     <span class="hero-line"></span>
-    <p>Добро пожаловать в витрину морских обитателей! Выбери экспонат и нажми, чтобы послушать аудиогид.</p>
-    <a class="btn-start" href="#exhibits">Начать аудиогид →</a>
+    <p>Добро пожаловать! Сканируйте QR-коды у каждого экспоната, чтобы послушать аудиогид.</p>
+    <a class="btn-back" href="javascript:history.back()">← Вернуться</a>
   </div>
 
-  <!-- ЭКСПОНАТЫ -->
-  <div class="section" id="exhibits">
-    <div class="section-title">🐠 Экспонаты</div>
-    <div class="grid">
-        <a class="exhibit-card" href="krab.html">
-          <img src="images/krab.png" alt="Камчатский краб" />
-          <span>Камчатский краб</span>
-        </a>
-        <a class="exhibit-card" href="akula.html">
-          <img src="images/akula.png" alt="Акула" />
-          <span>Акула</span>
-        </a>
-        <a class="exhibit-card" href="ryba-ezh.html">
-          <img src="images/ryba-ezh.png" alt="Рыба-ёж" />
-          <span>Рыба-ёж</span>
-        </a>
-        <a class="exhibit-card" href="morskoy-lev.html">
-          <img src="images/morskoy-lev.png" alt="Морской лев" />
-          <span>Морской лев</span>
-        </a>
-        <a class="exhibit-card" href="kashalot.html">
-          <img src="images/kashalot.png" alt="Клыки кашалота" />
-          <span>Клыки кашалота</span>
-        </a>
-        <a class="exhibit-card" href="langust.html">
-          <img src="images/langust.png" alt="Лангуст колючий" />
-          <span>Лангуст колючий</span>
-        </a>
-        <a class="exhibit-card" href="konek.html">
-          <img src="images/konek.png" alt="Морской конёк" />
-          <span>Морской конёк</span>
-        </a>
-        <a class="exhibit-card" href="ryba-mech.html">
-          <img src="images/ryba-mech.png" alt="Рыба-меч и рыба-пила" />
-          <span>Рыба-меч и рыба-пила</span>
-        </a>
-        <a class="exhibit-card" href="kit.html">
-          <img src="images/kit.png" alt="Китовый ус" />
-          <span>Китовый ус</span>
-        </a>
-        <a class="exhibit-card" href="zvezda.html">
-          <img src="images/zvezda.png" alt="Морская звезда и черепаха" />
-          <span>Морская звезда и черепаха</span>
-        </a>
+  <!-- ОТЗЫВ -->
+  <div class="section">
+    <div class="section-title">💬 Оставить отзыв</div>
+    <div class="review-card">
+      <p>Понравился ли вам аудиогид? Поделитесь впечатлениями — это поможет сделать его лучше!</p>
+      <a class="btn-form" href="https://docs.google.com/forms/d/e/1FAIpQLSfGHgtPnj8H-YwshW9VJdTUjqeETqkMshQ5AmoiyRpbg51Ayg/viewform" target="_blank">
+        ✏️ Написать отзыв
+      </a>
     </div>
   </div>
 
@@ -242,24 +155,12 @@
       <div class="contact-row">
         <div class="contact-icon">🌐</div>
         <div class="contact-text">
-          <div class="contact-label">Сайт</div>
+          <div class="contact-label">Сайт школы</div>
           <div class="contact-value">
             <a href="https://school06.gosuslugi.ru/" target="_blank">school06.gosuslugi.ru</a>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- ОТЗЫВ -->
-  <div class="section">
-    <div class="section-title">💬 Оставить отзыв</div>
-    <div class="review-card">
-      <p>Понравился ли вам аудиогид? Напишите своё мнение — это поможет сделать его лучше!</p>
-      <input class="review-name" id="reviewName" type="text" placeholder="Ваше имя (необязательно)" />
-      <textarea class="review-field" id="reviewText" rows="4" placeholder="Напишите ваш отзыв здесь..."></textarea>
-      <button class="btn-send" onclick="sendReview()">Отправить отзыв</button>
-      <div class="thanks" id="thanks">🎉 Спасибо за ваш отзыв!</div>
     </div>
   </div>
 
@@ -269,17 +170,5 @@
   </div>
 
 </div>
-
-<script>
-  function sendReview() {
-    const text = document.getElementById('reviewText').value.trim();
-    if (!text) { alert('Напишите что-нибудь 😊'); return; }
-    document.getElementById('reviewText').value = '';
-    document.getElementById('reviewName').value = '';
-    document.getElementById('thanks').style.display = 'block';
-    setTimeout(() => document.getElementById('thanks').style.display = 'none', 4000);
-  }
-</script>
-
 </body>
 </html>
