@@ -114,7 +114,9 @@
   </div>
 </div>
 <script>
-  const audio = new Audio('audio/krab.mp3');
+  const audio = new Audio();
+audio.src = 'audio/krab.wav';
+audio.type = 'audio/wav';
   const btn = document.getElementById('playBtn');
   const icon = document.getElementById('playIcon');
   const label = document.getElementById('playLabel');
